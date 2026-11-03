@@ -20,7 +20,7 @@ A cute, pastel-themed mobile application prototype created for the Open Universi
 
 ## Requirements
 
-- Node.js LTS (use a version supported by Expo).
+- Node.js 22 LTS (Expo SDK 57 requires Node 22.13+; Node 23 is not supported for this project).
 - Visual Studio Code or another code editor.
 - Expo Go on an Android or iOS phone, or an Android emulator.
 - An internet connection for the first dependency installation.
@@ -32,14 +32,21 @@ The project uses Expo SDK 57 and React Native 0.86. Expo documents Node.js LTS a
 1. Download and extract `Academia_React_Native_Source.zip`.
 2. Install Node.js LTS from https://nodejs.org/ and install Visual Studio Code from https://code.visualstudio.com/ if you do not already have them.
 3. Open VS Code, choose **File → Open Folder**, and select the extracted `Academia` folder.
-4. In VS Code, choose **Terminal → New Terminal**.
-5. Run:
+4. If you are on Node 23, switch to Node 22 LTS first using nvm-windows, fnm, or Volta. For example:
+
+   ```bash
+   nvm install 22.13.0
+   nvm use 22.13.0
+   ```
+
+5. In VS Code, choose **Terminal → New Terminal**.
+6. Run:
 
    ```bash
    npm install
    ```
 
-6. Start Expo:
+7. Start Expo:
 
    ```bash
    npx expo start

@@ -1,0 +1,17 @@
+export const C = {
+  ink: '#39364B',
+  muted: '#89869B',
+  pink: '#F2A7C6',
+  deepPink: '#D96D9C',
+  blush: '#FFF0F6',
+  lavender: '#EEE9FF',
+  lilac: '#8D82C8',
+  blue: '#E8F4FF',
+  mint: '#E8F7EF',
+  yellow: '#FFF4D8',
+  cream: '#FFFBF8',
+  white: '#FFFFFF',
+  line: '#F0E8ED',
+  green: '#63B99B',
+  red: '#D96F7F',
+};
