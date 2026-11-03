@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Academia",
+    "slug": "academia-stationery",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "android": { "package": "mu.academia.stationery" },
+    "ios": { "bundleIdentifier": "mu.academia.stationery" }
+  }
+}
