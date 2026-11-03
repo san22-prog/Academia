@@ -10,13 +10,48 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest --watchAll=false"
   },
   "dependencies": {
     "expo": "~57.0.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.0",
-    "react-native-web": "^0.21.2"
+    "react-native-web": "^0.21.2",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "babel-jest": "^29.7.0",
+    "babel-preset-expo": "^58.0.24",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.[jt]sx?$": [
+        "babel-jest",
+        {
+          "babelrc": false,
+          "configFile": false,
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "targets": {
+                  "node": "current"
+                }
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.js",
+      "**/?(*.)+(spec|test).js"
+    ]
   }
 }

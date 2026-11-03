@@ -160,6 +160,3 @@ export const products = productGroups.flatMap((group) =>
     };
   })
 );
-
-
-console.log("Total products:", products.length);
