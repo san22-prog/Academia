@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, Pressable } from 'react-native';
 import Button from '../components/Button';
-import BottomNav from '../components/BottomNav';
 
 export default function CartScreen({
   styles,
@@ -57,7 +56,6 @@ export default function CartScreen({
           </>
         )}
       </ScrollView>
-      <BottomNav active="cart" onNavigate={navigate} cartCount={cartCount} styles={styles} />
     </>
   );
 }

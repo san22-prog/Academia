@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, TextInput, View, Pressable } from 'react-native';
 import Button from '../components/Button';
-import BottomNav from '../components/BottomNav';
 import BrandMark from '../components/BrandMark';
 import Pill from '../components/Pill';
 import ProductCard from '../components/ProductCard';
@@ -23,7 +22,6 @@ export default function HomeScreen({
   toggleFavorite,
   favourites,
   filteredProducts,
-  cartCount,
   navigate,
 }) {
   const renderHeader = (title = 'academia', subtitle = 'little things for big ideas') => (
@@ -85,7 +83,6 @@ export default function HomeScreen({
         )}
         <View style={styles.footerNote}><Text style={styles.footerNoteIcon}>✿</Text><Text style={styles.footerNoteText}>A gentle reminder: you’re doing better than you think.</Text></View>
       </ScrollView>
-      <BottomNav active="home" onNavigate={navigate} cartCount={cartCount} styles={styles} />
     </>
   );
 }

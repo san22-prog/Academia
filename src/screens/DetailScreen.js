@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, Pressable } from 'react-native';
 import Button from '../components/Button';
-import BottomNav from '../components/BottomNav';
 
 export default function DetailScreen({
   styles,
@@ -10,8 +9,6 @@ export default function DetailScreen({
   toggleFavorite,
   addToCart,
   setScreen,
-  cartCount,
-  navigate,
   money,
 }) {
   return (
@@ -41,7 +38,6 @@ export default function DetailScreen({
         <Button title={`Add to my bag · ${money(selectedProduct.price)}`} onPress={() => addToCart(selectedProduct)} style={{ marginTop: 22 }} styles={styles} />
         <Button title="Keep browsing" variant="secondary" onPress={() => setScreen('home')} style={{ marginTop: 10 }} styles={styles} />
       </ScrollView>
-      <BottomNav active="home" onNavigate={navigate} cartCount={cartCount} styles={styles} />
     </>
   );
 }

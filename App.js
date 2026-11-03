@@ -5,8 +5,10 @@ import { styles } from './src/styles';
 import {
   Alert,
   Animated,
+  Easing,
   Modal,
   Pressable,
+  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -14,6 +16,7 @@ import {
   View,
 } from 'react-native';
 import { AuthScreen, HomeScreen, DetailScreen, CartScreen, ProfileScreen } from './src/screens';
+import BottomNav from './src/components/BottomNav';
 import { useAcademiaStore } from './src/store/useAcademiaStore';
 
 export default function App() {
@@ -60,12 +63,29 @@ export default function App() {
     navigate,
   } = useAcademiaStore();
 
-  const fade = useRef(new Animated.Value(0)).current;
+  const screenMotion = useRef(new Animated.Value(1)).current;
+  const hasMounted = useRef(false);
 
   useEffect(() => {
-    fade.setValue(0);
-    Animated.timing(fade, { toValue: 1, duration: 260, useNativeDriver: true }).start();
-  }, [screen, fade]);
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return undefined;
+    }
+
+    screenMotion.stopAnimation();
+    screenMotion.setValue(0);
+    const animation = Animated.timing(screenMotion, {
+      toValue: 1,
+      duration: 190,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: Platform.OS !== 'web',
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [screen, screenMotion]);
+
+  const screenOpacity = screenMotion.interpolate({ inputRange: [0, 1], outputRange: [0.985, 1] });
+  const screenOffset = screenMotion.interpolate({ inputRange: [0, 1], outputRange: [5, 0] });
 
   useEffect(() => () => {
     const timer = useAcademiaStore.getState().toastTimer;
@@ -142,7 +162,6 @@ const filteredProducts = useMemo(() => filterProducts(PRODUCTS, { category, sear
       toggleFavorite={toggleFavorite}
       favourites={favourites}
       filteredProducts={filteredProducts}
-      cartCount={cartCount}
       navigate={navigate}
     />
   );
@@ -155,8 +174,6 @@ const filteredProducts = useMemo(() => filterProducts(PRODUCTS, { category, sear
       toggleFavorite={toggleFavorite}
       addToCart={handleAddToCart}
       setScreen={setScreen}
-      cartCount={cartCount}
-      navigate={navigate}
       money={money}
     />
   );
@@ -209,9 +226,17 @@ const filteredProducts = useMemo(() => filterProducts(PRODUCTS, { category, sear
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor={C.cream} />
       <View style={styles.appBackground}>
-        <Animated.View style={[styles.screenFrame, { opacity: fade }]}>
+        <Animated.View style={[styles.screenFrame, { opacity: screenOpacity, transform: [{ translateY: screenOffset }] }]}>
           {screen === 'auth' ? renderAuth() : screen === 'home' ? renderHome() : screen === 'detail' ? renderDetail() : screen === 'cart' ? renderCart() : renderProfile()}
         </Animated.View>
+        {screen !== 'auth' ? (
+          <BottomNav
+            active={screen === 'cart' ? 'cart' : screen === 'profile' ? 'profile' : 'home'}
+            onNavigate={navigate}
+            cartCount={cartCount}
+            styles={styles}
+          />
+        ) : null}
         {renderFilters()}
         {toast && screen !== 'auth' ? <View pointerEvents="none" style={styles.toast}><Text style={styles.toastText}>{toast}</Text></View> : null}
       </View>

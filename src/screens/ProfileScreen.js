@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, TextInput, View, Pressable } from 'react-native';
 import Button from '../components/Button';
-import BottomNav from '../components/BottomNav';
 
 export default function ProfileScreen({
   styles,
@@ -49,7 +48,6 @@ export default function ProfileScreen({
         <Button title="Log out" variant="outline" onPress={() => { setPassword(''); setScreen('auth'); setAuthMode('login'); }} style={{ marginTop: 18 }} textStyle={{ color: '#D96D9C' }} styles={styles} />
         <Text style={styles.profileDisclaimer}>Academia demo · profile information is kept only in the current app session.</Text>
       </ScrollView>
-      <BottomNav active="profile" onNavigate={navigate} cartCount={cartCount} styles={styles} />
     </>
   );
 }
